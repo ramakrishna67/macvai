@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
+import type { TooltipItem } from "chart.js";
 
 ChartJS.register(
   LineElement,
@@ -64,7 +65,8 @@ export default function CoinChart({ prices }: { prices: [number, number][] }) {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          label: (ctx: any) => `$${ctx.raw.toFixed(2)}`,
+          label: (ctx: TooltipItem<"line">) =>
+            `$${(ctx.raw as number).toFixed(2)}`,
         },
       },
     },
